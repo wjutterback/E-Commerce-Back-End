@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 //const results = await sequelize.query('SELECT...', { type: sequelize.QueryTypes.SELECT }); // SELECT query - no destructuring
+
 // The `/api/products` endpoint
 
 // get all products
 router.get('/', async (req, res) => {
-  Product.findAll().then((product) => res.json(product));
-  // find all products
-  // be sure to include its associated Category and Tag data
+  Product.findAll({
+    include: [{ model: Category }, { model: Tag }],
+  }).then((product) => res.json(product));
 });
 
 // get one product
