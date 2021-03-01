@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
-//const results = await sequelize.query('SELECT...', { type: sequelize.QueryTypes.SELECT }); // SELECT query - no destructuring
-
-// The `/api/products` endpoint
 
 // get all products
 router.get('/', async (req, res) => {
@@ -20,8 +17,6 @@ router.get('/:id', (req, res) => {
   }).then((product) => res.json(product));
 });
 
-// create new product
-router.post('/', (req, res) => {
   /* req.body should look like this...
   Category:     Tag:
   1: shirts      1-2 music
@@ -30,13 +25,15 @@ router.post('/', (req, res) => {
   4: hats
   5: shoes
     {
-      product_name: "Basketball",
+      product_name: "Basketball Shirt",
       price: 200.00,
       stock: 3,
-      category:
-      tagIds: [1, 2, 3, 4]
+      category: 1
+      tagIds: [3, 4, 5, 6, 7]
     }
   */
+// create new product
+router.post('/', (req, res) => {
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
