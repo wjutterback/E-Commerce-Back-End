@@ -28,7 +28,6 @@ router.post('/', (req, res) => {
     });
 });
 
-//TODO: this.put
   router.put('/:id', (req, res) => {
     Tag.update(req.body, {
       where: {

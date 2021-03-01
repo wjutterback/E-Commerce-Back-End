@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
+// The `/api/products` endpoint
+
 // get all products
 router.get('/', async (req, res) => {
   Product.findAll({
@@ -17,21 +19,6 @@ router.get('/:id', (req, res) => {
   }).then((product) => res.json(product));
 });
 
-  /* req.body should look like this...
-  Category:     Tag:
-  1: shirts      1-2 music
-  2: shorts      3-7 colors
-  3: music       8 pop culture
-  4: hats
-  5: shoes
-    {
-      product_name: "Basketball Shirt",
-      price: 200.00,
-      stock: 3,
-      category: 1
-      tagIds: [3, 4, 5, 6, 7]
-    }
-  */
 // create new product
 router.post('/', (req, res) => {
   Product.create(req.body)
