@@ -23,10 +23,17 @@ router.get('/:id', (req, res) => {
 // create new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
+  Category:     Tag:
+  1: shirts      1-2 music
+  2: shorts      3-7 colors
+  3: music       8 pop culture
+  4: hats
+  5: shoes
     {
       product_name: "Basketball",
       price: 200.00,
       stock: 3,
+      category:
       tagIds: [1, 2, 3, 4]
     }
   */
@@ -52,9 +59,8 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+// update product //TODO: Currently getting
 router.put('/:id', (req, res) => {
-  // update product data
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -95,7 +101,10 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+  const { id } = req.params;
+  Product.destroy({
+    where: { id: id },
+  }).then(() => res.send('Product deleted'));
 });
 
 module.exports = router;
