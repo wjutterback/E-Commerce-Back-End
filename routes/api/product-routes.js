@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product //TODO: Currently getting
+// update product
 router.put('/:id', (req, res) => {
   Product.update(req.body, {
     where: {
@@ -89,7 +89,7 @@ router.put('/:id', (req, res) => {
 
       // run both actions
       return Promise.all([
-        ProductTag.destroy({ where: { id: productTagsToRemove } }),
+        ProductTag.destroy({ where: { product_id: productTagsToRemove } }),
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
@@ -104,7 +104,7 @@ router.delete('/:id', (req, res) => {
   const { id } = req.params;
   Product.destroy({
     where: { id: id },
-  }).then(() => res.send('Product deleted'));
+  }).then((data) => res.json(data));
 });
 
 module.exports = router;
