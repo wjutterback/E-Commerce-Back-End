@@ -30,7 +30,15 @@ router.post('/', (req, res) => {
 
 //TODO: this.put
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+  Category.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((data) => res.json(data))
+    .catch((err) => {
+      res.status(400).json(err);
+    });
 });
 
 router.delete('/:id', (req, res) => {
