@@ -45,6 +45,7 @@ router.post('/', (req, res) => {
 
 // update product
 router.put('/:id', (req, res) => {
+  // update product data
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -70,10 +71,9 @@ router.put('/:id', (req, res) => {
       const productTagsToRemove = productTags
         .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
         .map(({ id }) => id);
-
       // run both actions
       return Promise.all([
-        ProductTag.destroy({ where: { product_id: productTagsToRemove } }),
+        ProductTag.destroy({ where: { id: productTagsToRemove } }),
         ProductTag.bulkCreate(newProductTags),
       ]);
     })

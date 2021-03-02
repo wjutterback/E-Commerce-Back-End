@@ -29,9 +29,10 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+  const { id } = req.params;
   Category.update(req.body, {
     where: {
-      id: req.params.id,
+      id: id,
     },
   })
     .then((data) => res.json(data))
