@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](http://choosealicense.com/licenses/mit/)
 
-# Object Relational Mapping
+# E-Commerce Back End
 
 ## Description
 
